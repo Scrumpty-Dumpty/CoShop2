@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Lists</title>
+    <link rel="icon" href="../assets/logo.svg" type="image/svg+xml" />
+    <link href="../assets/styles/output.css" rel="stylesheet" />
+    <link href="../assets/styles/popupWindows.css" rel="stylesheet" />
+    <script
+      src="../assets/scripts/manageItems.js"
+      type="text/javascript"
+      defer
+    ></script>
+    <script src="../components/menu.js" type="text/javascript" defer></script>
+    <script src="../components/topnav.js" type="text/javascript" defer></script>
+  </head>
+  <body class="m-0 bg-cream">
+    <topnav-component></topnav-component>
+
+    <!-- Create List Popup Window -->
+    <div class="popup" id="list-popup">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-btn" onclick="showPopUpList()">&times;</div>
+        <h2>Create A List</h2>
+        <h2>What would you like to name this list?</h2>
+        <div id="myDIV" class="header">
+          <input type="text" id="listName" placeholder="List Name" />
+          <span onclick="createNewList()" class="addBtn">Add</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Item Popup Window -->
+    <div class="popup" id="item-popup">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-btn" onclick="showPopUpAddItem()">&times;</div>
+        <h2>What items would you like to add?</h2>
+        <div id="myDIV" class="header">
+          <input type="text" id="myInput" placeholder="Item Name" />
+          <button onclick="createNewElement()" class="addBtn">Add Item</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex">
+      <menu-component></menu-component>
+      <main class="w-full">
+        <!-- Current List Content -->
+        <div class="p-16">
+          <h1 class="text-4xl font-bold">Weekend BBQ</h1>
+          <div class="flex items-center gap-4">
+            <h2 class="text-3xl text-gray-600">Friends</h2>
+            <button>
+              <i class="fa-solid fa-user-group fa-lg">+</i>
+            </button>
+          </div>
+          <div class="text-right">
+            <p class="inline">Sort by</p>
+            <select id="sort-option" class="bg-cream p-2 font-bold">
+              <option selected>Manual</option>
+              <option value="Priority">Priority</option>
+              <option value="Store">Store</option>
+              <option value="Distance">Distance</option>
+              <option value="Person">Person</option>
+            </select>
+            <select id="sort-order" class="bg-cream p-2 font-medium">
+              <option selected>Ascending</option>
+              <option value="Down">Descending</option>
+            </select>
+          </div>
+
+          <!-- List Items -->
+          <ul class="mt-5" id="myUL"></ul>
+        </div>
+      </main>
+      <div
+        id="editWindow"
+        class="absolute inset-0 m-auto hidden h-96 w-4/12 rounded-xl bg-orange-300"
+      >
+        <div class="relative h-40 w-full rounded-t-xl bg-orange-400/50">
+          <img
+            id="pic-preview"
+            src="https://via.placeholder.com/130x160"
+            class="absolute -bottom-20 left-8 h-[160px] w-[130px] rounded-lg object-cover"
+          />
+        </div>
+        <button
+          class="absolute top-0 right-0 p-4"
+          onclick="document.getElementById('editWindow').classList.toggle('hidden')"
+        >
+          <i class="fa-solid fa-x"></i>
+        </button>
+        <div class="mt-16 p-5">
+          <div class="flex items-center gap-4">
+            <h1 class="text-2xl font-bold">Hot Dog Buns</h1>
+            <button><i class="fa-solid fa-trash-can text-red-700"></i></button>
+          </div>
+          <p>Quantity: 1</p>
+          <p>Added by: <span class="font-bold">Rick</span></p>
+          <form>
+            <label for="file-input">
+              Add a picture
+              <i class="fa-solid fa-camera"></i>
+            </label>
+
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onchange="readURL(this);"
+              class="hidden"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../assets/scripts/previewImage.js"></script>
+    <script src="../assets/scripts/popupWindows.js"></script>
+  </body>
+</html>

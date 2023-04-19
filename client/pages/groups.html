@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Groups</title>
+    <link rel="icon" href="../assets/logo.svg" type="image/svg+xml" />
+    <link href="../assets/styles/output.css" rel="stylesheet" />
+    <link href="../assets/styles/popupWindows.css" rel="stylesheet" />
+    <script src="../components/menu.js" type="text/javascript" defer></script>
+    <script src="../components/topnav.js" type="text/javascript" defer></script>
+  </head>
+  <body class="m-0 bg-cream">
+    <topnav-component></topnav-component>
+
+    <!-- Create Group Popup Window -->
+    <div class="popup" id="group-popup">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-btn" onclick="showPopUpGroup()">&times;</div>
+        <h2>Create A Group</h2>
+        <div id="myDIV" class="header">
+          <input type="text" id="myInput" placeholder="Group Name" />
+          <button onclick="createNewGroup()" class="text-1xl font-bold">
+            Create New Group
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex">
+      <menu-component></menu-component>
+      <main class="w-full p-16">
+        <!-- Current List Content -->
+        <h1 class="text-4xl font-bold">Your Groups</h1>
+        <div class="flex items-center gap-4 text-gray-600">
+          <h2 class="text-3xl">Create a Group</h2>
+          <button onclick="showPopUp()">
+            <i
+              class="fa-solid fa-plus fa-lg"
+              class="close-btn"
+              onclick="showPopUpGroup()"
+            ></i>
+          </button>
+        </div>
+        <!-- List Items -->
+        <ul class="mt-5" id="myUL">
+          <!-- li Container -->
+          <li>
+            <div
+              id="item"
+              class="flex items-center justify-between border-b border-gray-400 p-2"
+            >
+              <!-- li Content -->
+              <div class="flex items-center gap-4">
+                <input
+                  type="text"
+                  class="max-w-min bg-transparent text-xl outline-none"
+                  value="Weekend BBQ"
+                />
+                <button
+                  onclick="document.getElementById('editWindow').classList.toggle('hidden');"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button>
+                  <i class="fa-solid fa-trash-can text-red-700"></i>
+                </button>
+              </div>
+              <div class="flex items-center gap-4">
+                <img src="../assets/images/man-2.png" alt="" class="h-10" />
+              </div>
+            </div>
+          </li>
+        </ul>
+      </main>
+    <script src="../assets/scripts/popupWindows.js"></script>
+  </body>
+</html>

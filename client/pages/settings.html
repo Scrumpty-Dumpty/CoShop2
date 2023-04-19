@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Settings</title>
+    <link rel="icon" href="../assets/logo.svg" type="image/svg+xml" />
+    <link href="../assets/styles/output.css" rel="stylesheet" />
+    <script src="../components/menu.js" type="text/javascript" defer></script>
+    <script src="../components/topnav.js" type="text/javascript" defer></script>
+  </head>
+  <body class="m-0 bg-cream">
+    <topnav-component></topnav-component>
+    <div class="flex">
+      <menu-component></menu-component>
+      <main class="w-full p-12">
+        <h1 class="text-4xl font-bold">Settings</h1>
+        <section>
+          <div class="mt-4 border-b border-gray-300 pb-2">
+            <h2 class="text-2xl font-medium text-gray-600">Theme</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <h3 class="py-4 text-lg text-gray-700">Accent Color</h3>
+            <label for="customcolor"
+              ><i class="fa-solid fa-eyedropper fa-lg p-2"></i
+            ></label>
+            <input name="customcolor" type="color" id="colorpicker" />
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

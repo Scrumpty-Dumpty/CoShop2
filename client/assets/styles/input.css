@@ -1,0 +1,17 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
+@import url("https://unpkg.com/aos@2.3.1/dist/aos.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* for debugging purposes */
+* {
+  /* outline: 1px solid red !important; */
+  /* background: rgb(0 100 0 /0.1) !important; */
+}
+
+input:checked + * {
+  text-decoration: line-through;
+}
