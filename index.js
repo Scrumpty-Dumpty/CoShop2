@@ -19,7 +19,9 @@ app.get("/test", function (request, response) {
   response.type("text/plain");
   response.send("Node.js and Express running on port=" + port);
 });
-
+// app.get('/login', (req, res) => {
+//   res.sendFile('/login.html');
+// });
 const users = []
 app.post('/register', async (req, res) => {
   try {
@@ -35,10 +37,12 @@ const newUser = new User({
           email: users[0].email,
           password: users[0].password
       });
-      console.log('new user input values: ', newUser);
+      console.log('New user input values: ', newUser);
       await newUser.save();
+      console.log('User successfully entered into database!');
+      res.redirect('/pages/login.html');
 } catch (err){
-  console.log('user not entered into database: ', err);  
+  console.log('User was not entered into database: ', err);  
   }
 })
 app.listen(port, function () {
