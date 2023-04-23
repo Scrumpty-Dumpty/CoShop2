@@ -23,12 +23,7 @@ const userSchema = new mongoose.Schema({
 
   module.exports = User;
 
-  // Connect to MongoDB
-// mongoose.connect('mongodb+srv://CoShopUser:6TvlGsCx9PGmwpNl@coshopcluster.iyjalfb.mongodb.net/CoShopDB?retryWrites=true&w=majority', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   });
-  
+
 //   // Create a new User document and save it to the database
 //   const newUser = new User({
 //     name: 'John Doe',

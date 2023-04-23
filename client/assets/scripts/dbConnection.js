@@ -1,27 +1,18 @@
 // MongoDB Cluster username: CoShopUser
-// MongoDB Cluster password: 6TvlGsCx9PGmwpNl
+// MongoDB Cluster password: n5K4KtS33C8cQRhs
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require('mongoose');
 
 async function connectToDB() {
-  const uri = "mongodb+srv://CoShopUser:6TvlGsCx9PGmwpNl@CoShopCluster.mongodb.net/CoShopDB?retryWrites=true&w=majority";
-  // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
+  const uri = "mongodb+srv://CoShopUser:n5K4KtS33C8cQRhs@coshopcluster.iyjalfb.mongodb.net/?retryWrites=true&w=majority";
 
-  try {
-    // Connect the client to the server 
-    await client.connect();
-    console.log("Connected to MongoDB");
-    return client;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB', err);
+  });
 }
 
 module.exports = {
