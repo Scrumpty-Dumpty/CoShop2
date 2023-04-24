@@ -5,7 +5,6 @@
 // const app = express();
 // app.use(bodyParser.json());
 
-
 // // Route to handle user creation
 // app.post('/register', async (req, res) => {
 //   try {

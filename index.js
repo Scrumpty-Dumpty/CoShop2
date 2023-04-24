@@ -1,8 +1,16 @@
+// connect to the users database
+const { connectToDB } = require("./client/assets/scripts/dbConnection.js");
+const User = require("./client/models/User.js");
+
+connectToDB();
+
 const express = require("express");
 const app = express();
-// const path = require("path");
-// const User = require("./client/models/User");
-// const { connectToDB } = require('./dbConnection');
+app.use(express.json());
+// use the express.urlencoded middleware to parse form data and extract the fields name, email, and pass1 from the request body.
+app.use(express.urlencoded({ extended: true }));
+
+const bcrypt = require("bcrypt");
 
 app.use(express.static(__dirname + "/client"));
 // app.use(express.json());
@@ -12,45 +20,32 @@ app.get("/test", function (request, response) {
   response.type("text/plain");
   response.send("Node.js and Express running on port=" + port);
 });
-
+// app.get('/login', (req, res) => {
+//   res.sendFile('/login.html');
+// });
+const users = [];
+app.post("/register", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.pass1, 10);
+    users.push({
+      id: Date.now().toString(),
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    const newUser = new User({
+      name: users[0].name,
+      email: users[0].email,
+      password: users[0].password,
+    });
+    console.log("New user input values: ", newUser);
+    await newUser.save();
+    console.log("User successfully entered into database!");
+    res.redirect("/pages/login.html");
+  } catch (err) {
+    console.log("User was not entered into database: ", err);
+  }
+});
 app.listen(port, function () {
   console.log("Server is running at http://localhost:3000/");
 });
-
-// place this code before starting the server:
-
-// // ROUTE TO HANDLE USER CREATION
-// app.post('/register', async (req, res) => {
-//  // Set Content-Type header to application/json
-//  req.headers['content-type'] = 'application/json';
-//  const name = req.body.name;
-//       const email =  req.body.email;
-//       const password = req.body.password;
-
-//       // Extract name, email, and password from the request body
-//   // Log the extracted values to the console
-//   console.log('Name:', name);
-//   console.log('Email:', email);
-//   console.log('Password:', password);
-//   // Log the extracted values to the console
-
-//          //  enforce required fields
-
-//   if (!name || !email || !password ) {
-//     res.status(400).send("All fields are required.");
-//   }
-//       // Create a new user using the User model
-//       const user = new User({ name, email, password });
-
-//       // Save the new user to the database
-//       await user.save()
-//       .then(savedUser => {
-//               console.log('User document saved successfully:', savedUser);
-
-//             })
-//             .catch(error => {
-//               console.error('Error saving User document:', error);
-
-//             });
-
-//   });
