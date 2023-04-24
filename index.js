@@ -19,9 +19,7 @@ app.get("/test", function (request, response) {
   response.type("text/plain");
   response.send("Node.js and Express running on port=" + port);
 });
-// app.get('/login', (req, res) => {
-//   res.sendFile('/login.html');
-// });
+
 const users = []
 app.post('/register', async (req, res) => {
   try {
@@ -45,6 +43,29 @@ const newUser = new User({
   console.log('User was not entered into database: ', err);  
   }
 })
+
+app.post('/login', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(400).send('Invalid email or password');
+      return;
+    }
+
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    
+    if (!isMatch) {
+      res.status(400).send('Invalid email or password');
+      return;
+    }
+
+    res.redirect('/pages/index.html');
+  } catch (err) {
+    console.log('Error during user authentication: ', err);
+    res.status(500).send('Internal server error');
+  }
+});
+
 app.listen(port, function () {
   console.log("Server is running at http://localhost:3000/");
 });
