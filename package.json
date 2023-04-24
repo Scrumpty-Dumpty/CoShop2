@@ -18,13 +18,15 @@
     "passport-local": "^1.0.0"
   },
   "name": "coshop",
-  "description": "Project: Final Project A unique shared shopping list web app",
+  "description": "Final project for CPSC-44000",
   "version": "1.0.0",
-  "main": "connection_constants.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"tailwindcss -i ./src/assets/styles/input.css -o ./src/assets/styles/output.css --watch\" \"nodemon server.js\"",
-    "prod": "tailwindcss -i ./src/assets/styles/input.css -o ./src/assets/styles/output.css --minify",
-    "start": "node src/server.js"
+    "dev": "concurrently \"tailwindcss -i ./client/assets/styles/input.css -o ./client/assets/styles/output.css --watch\" \"nodemon index.js\"",
+    "prod": "tailwindcss -i ./client/assets/styles/input.css -o ./client/assets/styles/output.css --minify",
+    "start": "nodemon index.js",
+    "format-check": "npx prettier --check .",
+    "format-write": "npx prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -36,5 +38,5 @@
   "bugs": {
     "url": "https://github.com/Scrumpty-Dumpty/CoShop/issues"
   },
-  "homepage": "https://final-project-shopping.azurewebsites.net/"
+  "homepage": "https://coshop.azurewebsites.net/"
 }
