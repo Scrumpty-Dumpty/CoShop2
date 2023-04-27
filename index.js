@@ -1,56 +1,57 @@
 const express = require("express");
 const app = express();
-// const path = require("path");
-// const User = require("./client/models/User");
-// const { connectToDB } = require('./dbConnection');
+const bcrypt = require('bcrypt');
 
-app.use(express.static(__dirname + "/client"));
-// app.use(express.json());
+app.use(express.static(__dirname + '/client'))
 
-const port = process.env.PORT || 3000;
-app.get("/test", function (request, response) {
-  response.type("text/plain");
-  response.send("Node.js and Express running on port=" + port);
+// Start MongoDB Atlas ********
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: true}));
+
+const mongoose = require("mongoose");
+
+const mongooseUri = "mongodb+srv://CoShopUser:n5K4KtS33C8cQRhs@coshopcluster.iyjalfb.mongodb.net/CoShopDB"
+mongoose.connect(mongooseUri, {useNewUrlParser: true}, {useUnifiedTopology: true})
+
+// define a schema for the user collection
+const userSchema = ({
+  name: {
+      type: String,
+      required: true
+  }, 
+  email: {
+      type: String,
+      required: true,
+      unique: true
+  },     
+  password: {
+      type: String,
+      required: true
+  }
+  // figure out how to work around there being no image schema type 
 });
 
-app.listen(port, function () {
-  console.log("Server is running at http://localhost:3000/");
-});
+const User = mongoose.model('User', userSchema); 
 
-// place this code before starting the server:
+// Create route called from register.html
+app.post("/register", function (req, res) {
+	let newNote = new User({
+		name: req.body.name,
+		email: req.body.email,
+    password: req.body.pass1
+	})
+	
+	newNote.save();
+	res.redirect("/");
+})
 
-// // ROUTE TO HANDLE USER CREATION
-// app.post('/register', async (req, res) => {
-//  // Set Content-Type header to application/json
-//  req.headers['content-type'] = 'application/json';
-//  const name = req.body.name;
-//       const email =  req.body.email;
-//       const password = req.body.password;
 
-//       // Extract name, email, and password from the request body
-//   // Log the extracted values to the console
-//   console.log('Name:', name);
-//   console.log('Email:', email);
-//   console.log('Password:', password);
-//   // Log the extracted values to the console
+const port = process.env.PORT || 3000
+app.get('/test', function(request, response) {
+	response.type('text/plain')
+	response.send('Node.js and Express running on port='+port)
+})
 
-//          //  enforce required fields
-
-//   if (!name || !email || !password ) {
-//     res.status(400).send("All fields are required.");
-//   }
-//       // Create a new user using the User model
-//       const user = new User({ name, email, password });
-
-//       // Save the new user to the database
-//       await user.save()
-//       .then(savedUser => {
-//               console.log('User document saved successfully:', savedUser);
-
-//             })
-//             .catch(error => {
-//               console.error('Error saving User document:', error);
-
-//             });
-
-//   });
+app.listen(port, function() {
+	console.log("Server is running at http://localhost:3000/")
+})
